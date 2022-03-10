@@ -1,4 +1,3 @@
-import random
 import json
 import requests
 from bs4 import BeautifulSoup
@@ -30,7 +29,7 @@ def crawl_wiki_data2():
     try:
         response = requests.get(url, headers=headers)
         # 将一段文档传入BeautifulSoup的构造方法,就能得到一个文档的对象, 可以传入一段字符串
-        soup = BeautifulSoup(response.text, 'lxml')
+        soup = BeautifulSoup(response.text, 'html.parser')
 
         # 返回所有的<table>所有标签
         tables = soup.find_all('table')
@@ -56,7 +55,7 @@ def parse_wiki_data(table_html):
     '''
     解析得到选手信息，包括包括选手姓名和选手个人百度百科页面链接，存JSON文件,保存到work目录下
     '''
-    bs = BeautifulSoup(str(table_html), 'lxml')
+    bs = BeautifulSoup(str(table_html), 'html.parser')
     all_trs = bs.find_all('tr')
 
     stars = []
@@ -106,7 +105,7 @@ def crawl_everyone_wiki_urls():
         # 向选手个人百度百科发送一个http get请求
         response = requests.get(link, headers=headers)
         # 将一段文档传入BeautifulSoup的构造方法,就能得到一个文档的对象
-        bs = BeautifulSoup(response.text, 'lxml')
+        bs = BeautifulSoup(response.text, 'html.parser')
         # 获取选手的民族、星座、血型、体重等信息
         base_info_div = bs.find('div', {'class': 'basic-info J-basic-info cmn-clearfix'})
         dls = base_info_div.find_all('dl')
@@ -140,7 +139,7 @@ def crawl_everyone_wiki_urls():
             pic_list_response = requests.get(pic_list_url, headers=headers)
 
             # 对选手图片列表页面进行解析，获取所有图片链接
-            bs = BeautifulSoup(pic_list_response.text, 'lxml')
+            bs = BeautifulSoup(pic_list_response.text, 'html.parser')
             pic_list_html = bs.select('.pic-list img ')
             pic_urls = []
             for pic_html in pic_list_html:
@@ -186,34 +185,34 @@ def draw():
 
     arrs = [x for x in arrs if not pd.isnull(x)]
     # pandas.cut用来把一组数据分割成离散的区间。比如有一组年龄数据，可以使用pandas.cut将年龄数据分割成不同的年龄段并打上标签。bins是被切割后的区间.
-    bin = [159, 162, 165, 168, 171, 174]
+    bin = [0,164,169,1000]
     se1 = pd.cut(arrs, bin)
-    print(se1)
+    #print(se1)
 
     # pandas的value_counts()函数可以对Series里面的每个值进行计数并且排序。
     pd.value_counts(se1)
 
     sizes = pd.value_counts(se1)
-    print(sizes)
-    labels = '160~162', '163~165', '166~168', '169~171', '172~174'
-    explode = (0.2, 0.1, 0, 0)
+    #print(sizes)
+    labels = '<165', '165~169', '>=170'
 
     fig1, ax1 = plt.subplots()
     ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
             shadow=True, startangle=90)
     ax1.axis('equal')
-    plt.savefig('work/result/pie_result02.jpg')
+    plt.title('''《乘风破浪的姐姐》参赛嘉宾体重饼状图''',fontsize = 24)
+    plt.savefig('/home/aistudio/work/result/pie_result02.jpg')
     plt.show()
 
 
 if __name__ == '__main__':
     # 爬取百度百科中《乘风破浪的姐姐》中参赛选手信息，返回html
     htmls = crawl_wiki_data2()
-    print(htmls)
+    #print(htmls)
     # #解析html,得到第一季选手信息，保存为json文件
     parse_wiki_data(htmls[0])
     # #从每个选手的百度百科页面上爬取,并保存
-    crawl_everyone_wiki_urls()
+    #crawl_everyone_wiki_urls()
 
     print("所有信息爬取完成！")
 
