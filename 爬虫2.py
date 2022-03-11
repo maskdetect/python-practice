@@ -200,10 +200,14 @@ def draw():
     ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
             shadow=True, startangle=90)
     ax1.axis('equal')
-    plt.title('''《乘风破浪的姐姐》参赛嘉宾体重饼状图''',fontsize = 24)
-    plt.savefig('/home/aistudio/work/result/pie_result02.jpg')
-    plt.show()
 
+    # 设置显示中文
+    # plt.rcParams['font.sans-serif'] = ['SimHei']  # 指定默认字体
+    # 这里是调节横坐标的倾斜度，rotation是度数，以及设置刻度字体大小
+    plt.legend()
+    # plt.title('''《乘风破浪的姐姐》参赛嘉宾体重饼状图''',fontsize = 24)
+    plt.savefig('work/result/bar_result02.jpg')
+    plt.show()
 
 if __name__ == '__main__':
     # 爬取百度百科中《乘风破浪的姐姐》中参赛选手信息，返回html
