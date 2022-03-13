@@ -216,7 +216,7 @@ if __name__ == '__main__':
     # #解析html,得到第一季选手信息，保存为json文件
     parse_wiki_data(htmls[0])
     # #从每个选手的百度百科页面上爬取,并保存
-    #crawl_everyone_wiki_urls()
+    crawl_everyone_wiki_urls()
 
     print("所有信息爬取完成！")
 
