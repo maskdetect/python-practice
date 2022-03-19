@@ -14,8 +14,8 @@ fluid.Scope()
 
 ## 加载所有文件的路径，每个文件在数组中有一位
 modelPath = r'refMaskModel'
-dataMap = {'face': 0, 'face_mask': 1,'not_rule':2}
-classNum = 3
+dataMap = {'face': 0, 'face_mask': 1,'not_rule':2}  #这里应该有三种预测，
+classNum = 3          #这也应该为3
 limObj = 0.8
 iouLim=0.1
 
@@ -24,6 +24,9 @@ paddle.enable_static()
 place = fluid.CPUPlace()
 mainProg = fluid.default_main_program()
 exe = fluid.Executor(place)
+
+
+#fluid.io.load_inference_model载入我们训练的模型
 
 [inference_program,  # 预测用的program
  feed_target_names,  # 一个str列表，它包含需要在预测 Program 中提供数据的变量的名称。
@@ -62,6 +65,7 @@ def draw_rectangle(bbox, currentAxis=None, edgecolor='k', facecolor='y', fill=Fa
     currentAxis.add_patch(rect)
 
 
+    #求交并比，计算两个矩形的交并比，通常在检测任务里面可以作为一个检测指标。你的预测bbox和groundtruth之间的差异，就可以通过IOU来体现。
 def getIOU(xxyy1, xxyy2):
     x2 = min(xxyy1[1], xxyy2[1])
     x1 = max(xxyy1[0], xxyy2[0])
@@ -97,10 +101,10 @@ def refImg(imgPath):
                         max_ = (-1000)
                         maxClass = -1
                         # 比较是脸还是口罩
-                        # if res[5] > res[6]:
-                        #     maxClass = 0
-                        # else:
-                        #     maxClass = 1
+#                         if res[5] > res[6]:
+#                             maxClass = 0
+#                         else:
+#                             maxClass = 1
 
                         for c in range(5, 5 + classNum):
                             if res[c] > max_:
@@ -121,17 +125,6 @@ def refImg(imgPath):
         feed={feed_target_names[0]: img},
         fetch_list=fetch_targets
     )
-    # batch_outputs = exe.run(
-    #     program=inference_program,
-    #     feed={feed_target_names[0]: img},
-    #     fetch_list=fetch_targets
-    # )
-    #
-    # bboxes = np.array(batch_outputs[0])
-    # labels = bboxes[:, 0].astype('int32')
-    # scores = bboxes[:, 1].astype('float32')
-    # boxes = bboxes[:, 2:].astype('float32')
-
     print(time.time() - tic)
     logBox(pred0, stride=32, archors=[85, 66, 115, 146, 275, 240])
     logBox(pred1, stride=16, archors=[22, 45, 46, 33, 43, 88])
@@ -175,6 +168,10 @@ def refImg(imgPath):
 
     plt.show()
 
-
-refImg(r"masks/VOC_MASK/JPEGImages/00000_Mask_Mouth_Chin.jpg")
+#
+# todo 修改展示函数!!!! evaluate
+refImg(r"./masks/VOC_MASK/JPEGImages/test_00000331.jpg") # 不规范
+# 4_Dancing_Dancing_4_6
+# refImg(r"./VOC_MASK/JPEGImages/1_Handshaking_Handshaking_1_341.jpg")
+# refImg(r"./VOC_MASK/JPEGImages/00002_Mask_Mouth_Chin.jpg")
 
