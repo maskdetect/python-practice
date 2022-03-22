@@ -62,7 +62,7 @@ if __name__ == '__main__':
     for image in files:
         txtsrc=image.split('.')[0]+'.txt'
         file_handle = open(dst_dir+"/"+txtsrc, mode='w')
-        file_handle.write("0")
+        file_handle.write("1")
         file_handle.close()
 
     #明天我需要把群里三个图片都用文件夹的形式给txt打标签，然后与box对比，测得准确度

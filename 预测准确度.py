@@ -152,12 +152,18 @@ def refImg(imgPath):
             break
 
     # print("face")
+    flag=-1;
     for box in maybeBox:
         if box["state"] == 2:
             print(box)
             if box["class"] == 0:
+                flag=0
                 draw_rectangle(box["bbox"], edgecolor='r')
+            elif box["class"] == 1:
+                flag=1
+                draw_rectangle(box["bbox"], edgecolor='g')
             else:
+                flag=2
                 draw_rectangle(box["bbox"])
 
     # print("facemask")
@@ -167,11 +173,47 @@ def refImg(imgPath):
     #         draw_rectangle(box["bbox"])
 
     plt.show()
+    return flag
 
 #
 # todo 修改展示函数!!!! evaluate
-refImg(r"./masks/VOC_MASK/JPEGImages/test_00000331.jpg") # 不规范
+# refImg(r"./masks/VOC_MASK/JPEGImages/test_00000331.jpg") # 不规范
 # 4_Dancing_Dancing_4_6
 # refImg(r"./VOC_MASK/JPEGImages/1_Handshaking_Handshaking_1_341.jpg")
 # refImg(r"./VOC_MASK/JPEGImages/00002_Mask_Mouth_Chin.jpg")
 
+import os
+rootdir=r"./masks/VOC_MASK/JPEGImages"
+
+count=0
+list_file = os.listdir(rootdir)
+list_file=list_file[:20]
+sum= len(list_file)
+for file in list_file:
+    if os.path.isfile(os.path.join(rootdir, file)):
+        file_handle = open(rootdir + "/labeling/" + file.split('.')[0]+'.txt', mode='r')
+        lable=int(file_handle.read())
+        yuce=refImg(os.path.join(rootdir, file))
+        print(file)
+        if(yuce==1):
+            print("预测为规范口罩")
+        elif(yuce==0):
+            print("预测为脸")
+        elif(yuce==2):
+            print("预测为不规范口罩")
+        if (lable == 1):
+            print("标记为规范口罩")
+        elif (lable == 0):
+            print("标记为脸")
+        elif (lable == 2):
+            print("标记为不规范口罩")
+
+        if(yuce==lable):
+            count+=1
+        file_handle.close()
+
+print(count/sum)
+
+#0 没戴口罩
+#1 规范
+#2 不规范
