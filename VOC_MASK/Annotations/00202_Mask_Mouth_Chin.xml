@@ -1,0 +1,26 @@
+<annotation>
+    <folder>VOC</folder>
+    <filename>00202_Mask_Mouth_Chin.jpg</filename>
+    <path>E:\Resources\Application Tools\Data\dataset1\JPEGImages\00202_Mask_Mouth_Chin.jpg</path>
+    <source>
+        <database>FIRC</database>
+    </source>
+    <size>
+        <width>1024</width>
+        <height>1024</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+        <object>
+            <name>person</name>
+            <pose>Unspecified</pose>
+            <truncated>0</truncated>
+            <difficult>0</difficult>
+            <bndbox>
+                <xmin>239</xmin>
+                <ymin>396</ymin>
+                <xmax>769</xmax>
+                <ymax>897</ymax>
+            </bndbox>
+        </object>
+</annotation>
