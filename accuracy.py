@@ -223,9 +223,9 @@ def calculate_accuracy():
                 lable = 0
             elif b.firstChild.data == 'face_mask':
                 lable = 1
-            elif b.firstChild.data == 'not_standord':
+            elif b.firstChild.data == 'not_standard':
                 lable = 2
-            #     记得改not_standord
+            #     记得改not_standard
 
             # file_handle = open(rootdir + "/labeling/" + file.split('.')[0]+'.txt', mode='r')
             # lable=int(file_handle.read())
@@ -258,9 +258,19 @@ def calculate_accuracy():
                 count2 += 1
             print(count0, count1, count2)
 
+
+    print("标记为脸的照片数量：",  sum0)
+    print("预测为脸的照片数量：",  count0)
     print("预测为脸的正确率为：", count0 / sum0)
+    print()
+    print("标记为规范口罩的照片数量：",  sum1)
+    print("预测为规范口罩的照片数量：",  count1)
     print("预测为规范口罩的正确率为：", count1 / sum1)
+    print()
+    print("标记为不规范口罩的照片数量：",  sum2)
+    print("预测为不规范口罩的照片数量：",  count2)
     print("预测为不规范口罩的正确率为：", count2 / sum2)
+    print()
 
     # 0 没戴口罩
     # 1 规范

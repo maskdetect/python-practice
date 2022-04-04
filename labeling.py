@@ -28,7 +28,7 @@ def word_in_files(root_path, word):
     return result
 
 
-src_dir = r'/Users/hexiangyu/Downloads/yolov3 口罩/home/aistudio/masks/VOC_MASK/JPEG1'  # 源文件目录地址
+src_dir = r'E:\Users\hexiangyu\Downloads\dataset1 2\JPEGImages'  # 源文件目录地址
 dst_dir = r'/Users/hexiangyu/Downloads/yolov3 口罩/home/aistudio/masks/VOC_MASK/JPEG1/labeling'  # 目标文件目录地址
 
 def list_all_files(rootdir):
@@ -56,13 +56,16 @@ if __name__ == '__main__':
     # imagelist=(word_in_files(r'/Users/hexiangyu/Downloads/mask_detect/masks/VOC_MASK/JPEGImages', 'H'))
     #列出本目录下所有文件
     files = list_all_files(src_dir)
-
     print(files)
-
+    file_handle = open("1.txt", mode='w')
     for image in files:
-        txtsrc=image.split('.')[0]+'.txt'
-        file_handle = open(dst_dir+"/"+txtsrc, mode='w')
-        file_handle.write("1")
-        file_handle.close()
+        # txtsrc=image.split('.')[0]+'.txt'
+        file_handle.write(image[:-4]+'\n')
+    file_handle.close()
+    # for image in files:
+    #     txtsrc=image.split('.')[0]+'.txt'
+    #     file_handle = open(dst_dir+"/"+txtsrc, mode='w')
+    #     file_handle.write("1")
+    #     file_handle.close()
 
     #明天我需要把群里三个图片都用文件夹的形式给txt打标签，然后与box对比，测得准确度
