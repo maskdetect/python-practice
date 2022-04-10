@@ -178,7 +178,7 @@ def down_save_pic(name, pic_urls):
 def draw():
     # 显示matplotlib生成的图形
 
-    df = pd.read_json('work/stars_info1.json')
+    df = pd.read_json('../work/stars_info1.json')
     print(df)
     weights = df['height']
     arrs = weights.values

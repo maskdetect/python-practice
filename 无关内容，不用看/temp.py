@@ -1,7 +1,7 @@
 import os
 
-work_dir = '/VOC_MASK/Annotations/'
-new_dir='/VOC_MASK/Annotations/'
+work_dir = '../VOC_MASK/Annotations/'
+new_dir= '../VOC_MASK/Annotations/'
 print(1)
 # masks/VOC_MASK/JPEGImages/1_Handshaking_Handshaking_1_341.jpg
 

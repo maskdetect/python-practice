@@ -57,7 +57,7 @@ if __name__ == '__main__':
     #列出本目录下所有文件
     files = list_all_files(src_dir)
     print(files)
-    file_handle = open("1.txt", mode='w')
+    file_handle = open("../1.txt", mode='w')
     for image in files:
         # txtsrc=image.split('.')[0]+'.txt'
         file_handle.write(image[:-4]+'\n')
