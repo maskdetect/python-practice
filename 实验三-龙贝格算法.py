@@ -1,3 +1,5 @@
+from math import sin, pi
+
 import numpy as np
 
 
@@ -21,7 +23,7 @@ import numpy as np
 eps=6
 
 def func(x):
-    return x ** (3 / 2)
+    return x*sin(x)
 
 
 class Romberg:
@@ -30,12 +32,17 @@ class Romberg:
         self.integ_uplimit = integ_uplimit
 
     def calc(self):
-        t_seq1 = np.zeros(5, 'f')
-        s_seq2 = np.zeros(4, 'f')
-        c_seq3 = np.zeros(3, 'f')
-        r_seq4 = np.zeros(2, 'f')
+        t_seq1 = np.zeros(9, 'f')
+        s_seq2 = np.zeros(8, 'f')
+        c_seq3 = np.zeros(7, 'f')
+        r_seq4 = np.zeros(6, 'f')
+        r_seq5 = np.zeros(5, 'f')
+        r_seq6 = np.zeros(4, 'f')
+        r_seq7 = np.zeros(3, 'f')
+        r_seq8 = np.zeros(2, 'f')
+        r_seq9 = np.zeros(1, 'f')
 
-        hm = [(self.integ_uplimit - self.integ_downlimit) / 2 ** i for i in range(0, 5)]
+        hm = [(self.integ_uplimit - self.integ_downlimit) / 2 ** i for i in range(0, 9)]
         print(hm)
 
         fa = func(self.integ_downlimit)
@@ -43,7 +50,7 @@ class Romberg:
 
         t_seq1[0] = (1 / 2) * (self.integ_uplimit - self.integ_downlimit) * (fa + fb)
 
-        for i in range(1, 5):
+        for i in range(1, 9):
             sum = 0
             for j in range(1, 2 ** i, 2):  # 很奇怪，为什么不是等比而是等差，因为是递推公式的项,因为奇数项所以是步长是2
                 sum = sum + func(self.integ_downlimit + j * hm[i])*hm[i]
@@ -54,6 +61,7 @@ class Romberg:
         # s_seq2=[round((4*t_seq1[i+1]-t_seq1[i])/3,7)for i in range(0,4)]
 
         # 等价于以下代码
+
         for k, _ in enumerate(t_seq1):
             k=k-1
             s_seq2[k] = round((4 ** 1 * t_seq1[k + 1] - t_seq1[k]) / (4 ** 1 - 1), eps)
@@ -65,10 +73,30 @@ class Romberg:
         for k, _ in enumerate(c_seq3):
             k=k-1
             r_seq4[k] = round((4 ** 3 * c_seq3[k + 1] - c_seq3[k]) / (4 ** 3 - 1), eps)
-        print('R序列（第四列，即下标为2的序列）', r_seq4)
+        print('R序列（第四列，即下标为3的序列）', r_seq4)
+        for k, _ in enumerate(r_seq4):
+            k=k-1
+            r_seq5[k] = round((4 ** 4 * r_seq4[k + 1] - r_seq4[k]) / (4 ** 4 - 1), eps)
+        print('R序列（第五列，即下标为4的序列）', r_seq5)
+        for k, _ in enumerate(r_seq5):
+            k=k-1
+            r_seq6[k] = round((4 ** 5 * r_seq5[k + 1] - r_seq5[k]) / (4 ** 5 - 1), eps)
+        print('R序列（第六列，即下标为5的序列）', r_seq6)
+        for k, _ in enumerate(r_seq6):
+            k=k-1
+            r_seq7[k] = round((4 ** 6 * r_seq6[k + 1] - r_seq6[k]) / (4 ** 6 - 1), eps)
+        print('R序列（第七列，即下标为6的序列）', r_seq7)
+        for k, _ in enumerate(r_seq7):
+            k=k-1
+            r_seq8[k] = round((4 ** 7 * r_seq7[k + 1] - r_seq7[k]) / (4 ** 7 - 1), eps)
+        print('R序列（第八列，即下标为7的序列）', r_seq8)
+
 
         return 'end'  # 为啥要返回end？
 
 
-rom = Romberg(0, 1)
+
+
+rom = Romberg(0, 2*pi)
 print(rom.calc())
+
