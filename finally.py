@@ -159,10 +159,14 @@ def refImg(imgPath):
             bbox = box["bbox"]
             print(box)
             if box["class"] == 0:
-                cv2.rectangle(img, (int(bbox[0]), int(bbox[2])), (int(bbox[1]), int(bbox[3])),(255,0,0), 5)
+                h=int(bbox[3]-bbox[2])
+                bias=int(h*0.2)
+                cv2.rectangle(img, (int(bbox[0]), int(bbox[2]+bias)), (int(bbox[1]), int(bbox[3]+bias)),(255,0,0), 5)
                 # draw_rectangle(box["bbox"], edgecolor='r')
             else:
-                cv2.rectangle(img, (int(bbox[0]), int(bbox[2])), (int(bbox[1]), int(bbox[3])),(0,255,0), 5)
+                h=int(bbox[3]-bbox[2])
+                bias=int(h*0.2)
+                cv2.rectangle(img, (int(bbox[0]), int(bbox[2]+bias)), (int(bbox[1]), int(bbox[3]+bias)),(0,0,255), 5)
                 # draw_rectangle(box["bbox"])
 
     # print("facemask")
