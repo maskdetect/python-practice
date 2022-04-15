@@ -121,12 +121,12 @@ def draw_rectangle(bbox, currentAxis=None, edgecolor='k', facecolor='y', fill=Fa
                              edgecolor=edgecolor, facecolor=facecolor, fill=fill, linestyle=linestyle)
     currentAxis.add_patch(rect)
 
-# 就是从一个 文件名到各种信息的转变 -> reader 
+# 就是从一个 文件名到各种信息的转变 -> reader
 def dataReader2(xmllist, img_size=imgSize):#? 需要给imgsize吗？？？？
     labels = []
     gtboxes = []
     imgs = []
-    for i in xmllist:   #             路径。 1. 
+    for i in xmllist:   #             路径。 1.
         # 得到图片的size, obj(详细信息width,height) , img本身
         size, obj, img = loadXmlandImg(i, True, resize=img_size)
         imgs.append(img)
@@ -204,7 +204,7 @@ initPro = fluid.default_startup_program()
 mainProg = fluid.default_main_program()
 
 # place = fluid.CPUPlace() #use cpu???
-place = fluid.CUDAPlace(0)  # use gpu 
+place = fluid.CUDAPlace(0)  # use gpu
 exe = fluid.Executor(place)
 exe.run(program=initPro)
 
@@ -237,12 +237,12 @@ print("开始训练")
 dataNum = len(xmlList)
 print(dataNum)
 # TODO 看看总长度是多少???
-# 总次数 = 5 * dataNum/BATCH_SIZE * 1 = ? 
+# 总次数 = 5 * dataNum/BATCH_SIZE * 1 = ?
 for i in range(15):  # 训练5次?    0226:改为2次
     print("This is {} times in big FOR".format(i))
     testModel()  # 之前定义的函数
     random.shuffle(xmlList)  # 将序列中的元素随机打乱 -》 打乱xmlList
-    tic = time.time()  # 记录时间 
+    tic = time.time()  # 记录时间
     begin = 0
     end = BATCH_SIZE
     while end <= dataNum:  # 小于总数据num
@@ -262,9 +262,11 @@ for i in range(15):  # 训练5次?    0226:改为2次
         # print(la)
         if begin % 128 == 0:  # change here?
             print(i, begin, la, time.time() - tic)  # 打印训练的各种信息，时间等等
-            # 写一个详细的 tips !!! 
+            # 写一个详细的 tips !!!
         begin += BATCH_SIZE  # 280s 一次
         end += BATCH_SIZE
+
+fluid.io.save_persistables(exe, './model2', fluid.default_main_program())
 # 训练了2h+,还是不知道结果怎么样????
 # 显示中间过程!! 
 # 暂时保存模型
