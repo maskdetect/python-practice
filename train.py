@@ -232,13 +232,13 @@ def testModel():
 
 
 # TODO ...
-# fluid.io.load_persistables(exe,'./model', mainProg) # 直接注释掉?
+fluid.io.load_persistables(exe,'./model2', mainProg) # 直接注释掉?
 print("开始训练")
 dataNum = len(xmlList)
 print(dataNum)
 # TODO 看看总长度是多少???
 # 总次数 = 5 * dataNum/BATCH_SIZE * 1 = ? 
-for i in range(1):  # 训练5次?    0226:改为2次
+for i in range(15):  # 训练5次?    0226:改为2次
     print("This is {} times in big FOR".format(i))
     testModel()  # 之前定义的函数
     random.shuffle(xmlList)  # 将序列中的元素随机打乱 -》 打乱xmlList
@@ -268,7 +268,7 @@ for i in range(1):  # 训练5次?    0226:改为2次
 # 训练了2h+,还是不知道结果怎么样????
 # 显示中间过程!! 
 # 暂时保存模型
-fluid.io.save_persistables(exe, './model', fluid.default_main_program())
+fluid.io.save_persistables(exe, './model2', fluid.default_main_program())
 # 第二次 20-30s一个batch !!!
 
 # b, l, i = dataReader2(xmlList[0:1])
