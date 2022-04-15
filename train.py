@@ -13,10 +13,10 @@ import time
 import random
 
 # 基本参数
-xmlDir = r"VOC_MASK/Annotations"
-imgDir = r"VOC_MASK/JPEGImages"
+xmlDir = r"VOC_MASK\Annotations\new"
+imgDir = r"VOC_MASK\JPEGImages\new"
 xmlList = [os.path.join(xmlDir, f) for f in os.listdir(xmlDir)]
-labelDic = {'face': 0, 'face_mask': 1,'not_standard':2}
+labelDic = {'m': 0, 's': 1}
 BATCH_SIZE = 16 
 imgSize = (448,448)  # w,h
 iouLim = 0.1
@@ -275,7 +275,7 @@ fluid.io.save_persistables(exe, './model', fluid.default_main_program())
 # print(b.shape, l.shape, i.shape)
 
 # 保存预测模型
-fluid.io.save_inference_model("./refMaskModel/",
+fluid.io.save_inference_model("./refMaskModel2/",
                               feeded_var_names=['image'],
                               target_vars=[P0,P1,P2],
                               executor=exe)

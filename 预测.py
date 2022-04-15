@@ -166,12 +166,12 @@ def refImg(imgPath):
     #         print(box)
     #         draw_rectangle(box["bbox"])
 
-    plt.show()
+    plt.savefig("result.jpg")
 
 #
 # todo 修改展示函数!!!! evaluate
 # refImg(r"./VOC_MASK/JPEGImages/test_00000331.jpg") # 不规范
-refImg(r"/Users/hexiangyu/Downloads/mask_detect/IMG_7888.jpg") # 不规范
+refImg(r"VOC_MASK/JPEGImages/1_Handshaking_Handshaking_1_46.jpg") # 不规范
 # 4_Dancing_Dancing_4_6
 # refImg(r"./VOC_MASK/JPEGImages/1_Handshaking_Handshaking_1_341.jpg")
 # refImg(r"./VOC_MASK/JPEGImages/00002_Mask_Mouth_Chin.jpg")

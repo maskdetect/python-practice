@@ -1,0 +1,14 @@
+<annotation>
+	<folder>/home/daniel/Data/Dataset/FaceMaskNew/train_mafa</folder>
+	<filename>test_00002558.jpg</filename>
+	<size><height>500</height><width>446</width><depth>3</depth></size><object>
+		<name>face_mask</name>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>97</xmin>
+			<ymin>107</ymin>
+			<xmax>289</xmax>
+			<ymax>357</ymax>
+		</bndbox>
+	</object>
+</annotation>
