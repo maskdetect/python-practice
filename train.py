@@ -17,7 +17,7 @@ xmlDir = r"VOC_MASK\Annotations\new"
 imgDir = r"VOC_MASK\JPEGImages\new"
 xmlList = [os.path.join(xmlDir, f) for f in os.listdir(xmlDir)]
 labelDic = {'m': 0, 's': 1}
-BATCH_SIZE = 16 
+BATCH_SIZE = 4
 imgSize = (448,448)  # w,h
 iouLim = 0.1
 # anchorBox = [(40, 160), (80, 210), (80, 400)]  # 前宽后高
@@ -238,7 +238,7 @@ dataNum = len(xmlList)
 print(dataNum)
 # TODO 看看总长度是多少???
 # 总次数 = 5 * dataNum/BATCH_SIZE * 1 = ? 
-for i in range(15):  # 训练5次?    0226:改为2次
+for i in range(1):  # 训练5次?    0226:改为2次
     print("This is {} times in big FOR".format(i))
     testModel()  # 之前定义的函数
     random.shuffle(xmlList)  # 将序列中的元素随机打乱 -》 打乱xmlList
