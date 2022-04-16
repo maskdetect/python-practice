@@ -232,7 +232,7 @@ def testModel():
 
 
 # TODO ...
-fluid.io.load_persistables(exe,'./model2', mainProg) # 直接注释掉?
+#fluid.io.load_persistables(exe,'./model2', mainProg) # 直接注释掉?
 print("开始训练")
 dataNum = len(xmlList)
 print(dataNum)
@@ -266,19 +266,20 @@ for i in range(15):  # 训练5次?    0226:改为2次
         begin += BATCH_SIZE  # 280s 一次
         end += BATCH_SIZE
 
-        fluid.io.save_persistables(exe, './model2', fluid.default_main_program())
-        # 训练了2h+,还是不知道结果怎么样????
-        # 显示中间过程!!
-        # 暂时保存模型
-        fluid.io.save_persistables(exe, './model2', fluid.default_main_program())
-        # 第二次 20-30s一个batch !!!
 
-# b, l, i = dataReader2(xmlList[0:1])
-# print(b.shape, l.shape, i.shape)
+fluid.io.save_persistables(exe, './model2', fluid.default_main_program())
+    # 训练了2h+,还是不知道结果怎么样????
+    # 显示中间过程!!
+    # 暂时保存模型
+    # fluid.io.save_persistables(exe, './model2', fluid.default_main_program())
+    # 第二次 20-30s一个batch !!!
 
-# 保存预测模型
+    # b, l, i = dataReader2(xmlList[0:1])
+    # print(b.shape, l.shape, i.shape)
+
+    # 保存预测模型
 fluid.io.save_inference_model("./refMaskModel2/",
-                              feeded_var_names=['image'],
-                              target_vars=[P0,P1,P2],
-                              executor=exe)
+                                  feeded_var_names=['image'],
+                                  target_vars=[P0, P1, P2],
+                                  executor=exe)
 

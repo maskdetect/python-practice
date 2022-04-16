@@ -15,7 +15,7 @@ print("开始运行")
 fluid.Scope()
 
 ## 加载所有文件的路径，每个文件在数组中有一位
-modelPath = r'refMaskModel2'
+modelPath = r'refMaskModel3'
 dataMap = {'m': 0, 's': 1}  #这里应该有三种预测，
 classNum = 2          #这也应该为3
 limObj = 0.8
