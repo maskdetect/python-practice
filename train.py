@@ -266,12 +266,12 @@ for i in range(15):  # 训练5次?    0226:改为2次
         begin += BATCH_SIZE  # 280s 一次
         end += BATCH_SIZE
 
-fluid.io.save_persistables(exe, './model2', fluid.default_main_program())
-# 训练了2h+,还是不知道结果怎么样????
-# 显示中间过程!! 
-# 暂时保存模型
-fluid.io.save_persistables(exe, './model2', fluid.default_main_program())
-# 第二次 20-30s一个batch !!!
+        fluid.io.save_persistables(exe, './model2', fluid.default_main_program())
+        # 训练了2h+,还是不知道结果怎么样????
+        # 显示中间过程!!
+        # 暂时保存模型
+        fluid.io.save_persistables(exe, './model2', fluid.default_main_program())
+        # 第二次 20-30s一个batch !!!
 
 # b, l, i = dataReader2(xmlList[0:1])
 # print(b.shape, l.shape, i.shape)
