@@ -232,7 +232,7 @@ def testModel():
 
 
 # TODO ...
-#fluid.io.load_persistables(exe,'./model2', mainProg) # 直接注释掉?
+fluid.io.load_persistables(exe,'./model2', mainProg) # 直接注释掉?
 print("开始训练")
 dataNum = len(xmlList)
 print(dataNum)
