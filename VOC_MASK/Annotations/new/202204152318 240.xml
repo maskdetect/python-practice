@@ -1,0 +1,38 @@
+<annotation>
+	<folder>202204152318 (2022-4-15 23-31-01)</folder>
+	<filename>202204152318 240.jpg</filename>
+	<path>E:\202204152318 (2022-4-15 23-31-01)\202204152318 240.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2160</width>
+		<height>1080</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>m</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1124</xmin>
+			<ymin>328</ymin>
+			<xmax>1220</xmax>
+			<ymax>434</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>s</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1314</xmin>
+			<ymin>596</ymin>
+			<xmax>1380</xmax>
+			<ymax>713</ymax>
+		</bndbox>
+	</object>
+</annotation>
