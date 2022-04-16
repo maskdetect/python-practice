@@ -13,7 +13,7 @@ import time
 import random
 
 # 基本参数
-xmlDir = r"VOC_MASK\Annotations\new"
+xmlDir = r"VOC_MASK\Annotations\s\new"
 imgDir = r"VOC_MASK\JPEGImages\new"
 xmlList = [os.path.join(xmlDir, f) for f in os.listdir(xmlDir)]
 labelDic = {'m': 0, 's': 1}
@@ -232,7 +232,9 @@ def testModel():
 
 
 # TODO ...
-fluid.io.load_persistables(exe,'./model2', mainProg) # 直接注释掉?
+model_path='./model2'
+if(os.path.exists(model_path)):
+    fluid.io.load_persistables(exe,model_path, mainProg) # 直接注释掉?
 print("开始训练")
 dataNum = len(xmlList)
 print(dataNum)
